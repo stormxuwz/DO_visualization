@@ -1,0 +1,742 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bath",
+				"bathymetry"
+			],
+			[
+				"Ve",
+				"Vegas"
+			],
+			[
+				"Las",
+				"LasVegas"
+			],
+			[
+				"hend",
+				"henderson"
+			],
+			[
+				"char",
+				"charlotte_sql"
+			],
+			[
+				"tem",
+				"tempe_sql"
+			],
+			[
+				"bui",
+				"businessSub"
+			],
+			[
+				"change",
+				"changeColor"
+			],
+			[
+				"logger",
+				"loggerInfo"
+			],
+			[
+				"creat",
+				"createGrid"
+			],
+			[
+				"loca",
+				"locationInfo"
+			],
+			[
+				"conve",
+				"convexHullModel"
+			],
+			[
+				"lati",
+				"latitudeRange"
+			],
+			[
+				"longi",
+				"longitudeRange"
+			],
+			[
+				"effec",
+				"effectiveLogger"
+			],
+			[
+				"SQL_en",
+				"SQL_engine_2014"
+			],
+			[
+				"dum",
+				"dumps	function"
+			],
+			[
+				"retu",
+				"returnData"
+			],
+			[
+				"pro",
+				"promise"
+			],
+			[
+				"DO_l",
+				"DO_raw_list"
+			],
+			[
+				"DO_",
+				"DO_raw_list"
+			],
+			[
+				"ind_",
+				"ind_y"
+			],
+			[
+				"ind",
+				"ind_x"
+			],
+			[
+				"bathymet",
+				"bathymetry_raster"
+			],
+			[
+				"end",
+				"end{table}	cs446_report.tex"
+			],
+			[
+				"Test_nu",
+				"Test_numOfWords"
+			],
+			[
+				"Train_nu",
+				"Train_numOfWords"
+			],
+			[
+				"crea",
+				"createNew"
+			],
+			[
+				"train",
+				"trainLabel"
+			],
+			[
+				"emp",
+				"emptyset	latex-mathsymbols"
+			],
+			[
+				"ci",
+				"cite{keylist}	latex-document"
+			],
+			[
+				"unique",
+				"uniqueIndex"
+			],
+			[
+				"xbgo",
+				"xgboost_predict"
+			],
+			[
+				"c_in",
+				"c_ingredientsDTM"
+			],
+			[
+				"ing",
+				"ingredients"
+			],
+			[
+				"meta",
+				"allMeta"
+			],
+			[
+				"push",
+				"push2SQL"
+			],
+			[
+				"data",
+				"DataFrame"
+			],
+			[
+				"pu",
+				"push2SQL"
+			],
+			[
+				"origin",
+				"originalFile"
+			],
+			[
+				"csv",
+				"csvFolder"
+			],
+			[
+				"seabi",
+				"seabird2SQL"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"cite",
+				"\\citealp"
+			],
+			[
+				"bib",
+				"bibliography{file}	latex-document"
+			],
+			[
+				"bi",
+				"bibliography{file}	latex-document"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+					"Force"
+				]
+			],
+			[
+				"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+					"Force"
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					"Clean up Files"
+				],
+				[
+					"Packages/User/myLatex.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/LaTeX-Plus/support/LaTex-Plus.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXing/LaTeX (TikZ).sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX (TikZ).sublime-build",
+					"Clean up Files"
+				]
+			],
+			[
+				"Packages/LaTeXing/LaTeX (TikZ).sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					"Clean up Files"
+				]
+			],
+			[
+				"Packages/LaTeXing/LaTeX.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					"Clean up Files"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/LaTeXing/LaTeX.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXing/LaTeX.sublime-build",
+					"Clean up Files"
+				],
+				[
+					"Packages/User/myLatex.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/LaTeXing/LaTeX.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 308.0,
+		"last_filter": "repl r",
+		"selected_items":
+		[
+			[
+				"repl r",
+				"SublimeREPL: R"
+			],
+			[
+				"sublim",
+				"SublimeREPL: R"
+			],
+			[
+				"ipyt",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"sublime",
+				"SublimeREPL: R"
+			],
+			[
+				"ipy",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"sub",
+				"SublimeREPL: Python"
+			],
+			[
+				"r-box",
+				"R-Box: Choose Program"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Advanced Install Package"
+			],
+			[
+				"R-bo",
+				"R-Box: Choose Program"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"Rbo",
+				"R-Box: Choose Program"
+			],
+			[
+				"R",
+				"R-Box: Choose Program"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"latexing",
+				"LaTeXing: Check System"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
+			[
+				"latexing sy",
+				"LaTeXing: Synchronise Remote Data"
+			],
+			[
+				"latexing syn",
+				"LaTeXing: Synchronise Remote Data"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"linstall ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 160.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/spkrig.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/newInterpolation.R",
+		"/Users/WenzhaoXu/Developer/adsa/main.R",
+		"/Users/WenzhaoXu/Developer/adsa/main.py",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/SublimeREPL.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/R-Box.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/R-Box/R-Box.sublime-settings",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/R_sql.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/pythonSQL.py",
+		"/Users/WenzhaoXu/Downloads/hackathon/subset/ADSA_yelp_checkin_subset.csv",
+		"/Users/WenzhaoXu/Downloads/hackathon/subset/ADSA_yelp_business_subset.csv",
+		"/Users/WenzhaoXu/Developer/DO_visualization/static/js/spatial.js",
+		"/Users/WenzhaoXu/Developer/DO_visualization/app.py",
+		"/Users/WenzhaoXu/Downloads/credentials-2.csv",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/code/DO_class.R",
+		"/Users/WenzhaoXu/Developer/DO_visualization/templates/index.html",
+		"/Users/WenzhaoXu/Developer/DO_visualization/static/js/button.js",
+		"/Volumes/Mac Backup/Developer/DO_visualization_threejs/stations.json",
+		"/Users/WenzhaoXu/Developer/DO_visualization/css/jquery.simple-dtpicker.css",
+		"/Users/WenzhaoXu/Desktop/tmp.py",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/js/spatial.js",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/dataBase.php",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/js/test.js",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Assignments/Courses/CS411/Project/account.php",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/index.html",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/js/dataBase.php",
+		"/Users/WenzhaoXu/Downloads/DO_visualization_threejs-master/js/button.js",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Personal/Activities/Career/Job 2016/resume_2016.tex",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/createGrid.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/tmp.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/findBathy.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/main.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/plot_func.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/netcd.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/findMatrix.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/tmp2.R",
+		"/Users/WenzhaoXu/Developer/R/test/NAMESPACE",
+		"/Users/WenzhaoXu/Developer/R/test/DESCRIPTION",
+		"/Users/WenzhaoXu/Downloads/cv_4/resume.cls",
+		"/Users/WenzhaoXu/Downloads/sherlock.the.abominable.bride.1080p.hdtv.x264-moritz/sherlock.the.abominable.bride.1080p.hdtv.x264-moritz.简体&英文.srt",
+		"/Users/WenzhaoXu/Downloads/res2.tex",
+		"/Users/WenzhaoXu/Desktop/writing_wenzhao_ouyang/writing/cs446_report.tex",
+		"/Users/WenzhaoXu/Developer/cooking/code/crossVal.R",
+		"/Users/WenzhaoXu/Developer/cooking/code/classifier.R",
+		"/Users/WenzhaoXu/Developer/cooking/code/reportPlot.R",
+		"/Users/WenzhaoXu/Developer/cooking/code/main.R",
+		"/Users/WenzhaoXu/Developer/cooking/results/phrase_5_score_tmp_small.csv",
+		"/Users/WenzhaoXu/Developer/cooking/results/phrase_5_score_tmp_large.csv",
+		"/Users/WenzhaoXu/Developer/cooking/tmp/tmp_results.csv",
+		"/Users/WenzhaoXu/Downloads/trunk/demo-word.sh",
+		"/Users/WenzhaoXu/Developer/Seabird/SeabirdGUI.py",
+		"/Users/WenzhaoXu/Developer/Seabird/new_thermocline.py",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/sublime_jedi.sublime-settings",
+		"/Users/WenzhaoXu/Desktop/test.py",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter6.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter4.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/Proposal.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter1.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter2.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter3.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Assignments/Courses/CS446/hw7/wxu15_hw7.tex",
+		"/Users/WenzhaoXu/Developer/Triaxus_Analysis/Triaxus_code/Main.R",
+		"/Users/WenzhaoXu/Library/Application Support/LaunchBar/Actions/JRstudio.lbaction/Contents/Scripts/default.py",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/NCSA2004_Dec4th_1330-1630.txt",
+		"/Users/WenzhaoXu/Developer/Project_IO/Seabird/csvFile/HU06_2010_Aug_08.csv",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter5.tex",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/LaTeX-Plus/README.md",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Assignments/Courses/CS446/hw5/hw5_Wenzhao.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Assignments/Courses/CS446/hw6/wxu15-hw6.tex",
+		"/Users/WenzhaoXu/Developer/Seabird/analysis2.R",
+		"/Users/WenzhaoXu/Developer/cooking/newCode.R",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/Proposal.aux",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/tex/methodology.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.tex",
+		"/Users/WenzhaoXu/Desktop/README",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter4.tex [25 <./figure/chapter2/ratioMap.pdf>] [26 <./figure/chapter2/depthPlot.png> <./figure/chapter2/concPlot.png> <./figure/chapter2/sizePlot.png>] [27 <./figure/chapter2/shapePlot.png> <./figure/chapter2/dclMetalimPlot.png",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/chapter2",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Prelim/Chapter4.tex",
+		"/Users/WenzhaoXu/Downloads/dataPreprocessing.R",
+		"/Users/WenzhaoXu/Desktop/accessToWeb",
+		"/private/etc/krb5.conf",
+		"/Users/WenzhaoXu/Desktop/htdocs/phpMyAdmin/config.inc.php",
+		"/Users/WenzhaoXu/Desktop/htdocs/phpMyAdmin/readme.php",
+		"/private/etc/yfs/cellservdb.conf",
+		"/private/etc/yfs/thiscell.conf",
+		"/Volumes/Mac Backup/Developer/Project_IO/Seabird/csvFile/DD19_1996_Aug_20.csv",
+		"/Users/WenzhaoXu/Developer/Seabird/seabird2SQL.py",
+		"/Volumes/Mac Backup/Developer/Project_IO/Seabird/station_loc.csv",
+		"/Users/WenzhaoXu/Downloads/agu_template/agutmpl.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/tex/results.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/tex/discussion.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.bbl",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/tex/introduction.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/tex/Remote.bib",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/ref/DCL.bib",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/ref/Remote.bib",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/myLatex.sublime-build",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.aux",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/LaTeX-Plus/LaTeX-Plus.sublime-settings",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/Remote.bib",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/untitled.sublime-build",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/test.tex",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/LaTeXing/LaTeXing.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/LaTeXing.sublime-settings",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/test.log",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Cache/LaTeXing/bin/activate_application",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/WenzhaoXu/Desktop/latex.tex",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.log",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.fdb_latexmk",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Paper/DCL_GreatLakes/draft.fls",
+		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/LaTeXing/latexing/api/zotero.map",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Assignments/Courses/CS446/cs446.tex",
+		"/Users/WenzhaoXu/Developer/zotfile/install.rdf",
+		"/Users/WenzhaoXu/Developer/Seabird/seabird_class.py",
+		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Proj_Triaxus/Output/Paper/NewPdfFigure/new_svg/flow.svg",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/interpolation.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/tmp3.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/krigin.R",
+		"/Users/WenzhaoXu/Desktop/test/Untitled.tex",
+		"/Volumes/Mac Backup/Developer/Triaxus_ShipAlgorithm/TriaxusGUI.R"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"python",
+			"map",
+			"grid",
+			"engin",
+			"test",
+			"myData",
+			"rSub",
+			"bayesian",
+			"naive",
+			"svm",
+			"kaggle",
+			"xgboosting",
+			"70",
+			"-2",
+			"ﬂourescence",
+			"duration",
+			"img/dummy",
+			"ncsa",
+			"Longhi2009Environmental",
+			"Barbiero2004Deep",
+			"file",
+			"command",
+			"latex",
+			"zotero"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Bayesian",
+			"Naive",
+			"SVM",
+			"Kaggle",
+			"xgboost",
+			"figure/placeholder"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 278.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/R-Box/support/R-Box.sublime-build",
+	"project": "DO_vis.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 240.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
