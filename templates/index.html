@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lake Erie DO Visualization</title>
+
+	<!-- JavaScript -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="static/js/jquery.simple-dtpicker.js"></script>
+	<script type="text/javascript" src="static/js/chroma.min.js"></script>
+
+
+	<!-- CSS -->
+	<link type="text/css" href="static/css/jquery.simple-dtpicker.css" rel="stylesheet" />
+	<link type="text/css" href="static/css/myCSS.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="static/css/skeleton.css">
+</head>
+
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<div class="six columns">
+
+			<h5>Spatial data</h5>
+				<input type="text" id="time_pick" value=""> 
+				<button id="Plot">Show all stations at this time</button> </br>
+				<button id="Plot_add10">+10 mins</button>
+				<button id="Plot_addhour">+1 hour</button>
+				<button id="Plot_addday">+1 Day</button>
+				<button id="Plot_addmonth">+1 Month</button> </br>
+
+				<button id="Plot_minus10">-10 mins</button>
+				<button id="Plot_minushour">-1 hour</button>
+				<button id="Plot_minusday">-1 Day</button>
+				<button id="Plot_minusmonth">-1 Month</button>
+
+				<button id="3d">3D Animation</button> </br>
+
+				
+				Visualization Type: <input type="radio" name="DO_data" id="raw" value="Raw" checked> Raw Value
+         		<input type="radio" name="DO_data" id="averaged" value="averaged"> Daily Averaged Value
+         		<input type="radio" name="DO_data" id="variance" value="variance"> Daily Std<br>
+         		<input type="checkbox" id="temporal_relative"> Temporal Relative <br>
+         		
+				<!-- <button id="Plot_movie">See movie</button>	 -->
+				<div id="map" style="width: 100%; height: 450px"></div>
+
+			</div>
+
+			<div class="six columns">
+			<h5>Station time series</h5>
+				From <input type="text" id="start_time" value=""> 
+				To <input type="text" id="end_time" value="">  
+
+				<button id="same_time"> Copy Time </button> </br>
+				<!-- <button id="day_range">Show daily</button> -->
+				<!-- <button id="month_range">Show weekly</button> -->
+				<!-- <button id="month_range">Show monthly</button> -->
+
+				<button id="tsPlot_adddata">+1 day data</button>
+				<button id="tsPlot_addday">+1 Day</button>
+				<button id="tsPlot_addmonth">+1 Month</button> </br>
+
+				<button id="tsPlot_minusdata">-1 day data</button>
+				<button id="tsPlot_minusday">-1 Day</button>
+				<button id="tsPlot_minusmonth">-1 Month</button> </br>
+
+				
+
+				<div id="timeSeriesSVG">
+					<div id="stationName"> Station </div>
+
+					<svg id="timeSeries"></svg>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+<script type="text/javascript" src="static/js/button.js"></script>
+<script type="text/javascript" src="static/js/spatial.js"></script>
+	
+<!--	<div id="timeSeries">Show Time Series Here</div>-->
+	
+	<!-- 
+	<mydiv>
+		<svg height="100" width="100">
+  			<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#5454aa" />
+		</svg>
+	</mydiv>
+ 	-->
+
+</body>
+</html>
