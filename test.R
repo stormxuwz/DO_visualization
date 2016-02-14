@@ -12,7 +12,12 @@ ui <- bootstrapPage(
     selectInput("colors", "Color Scheme",
       rownames(subset(brewer.pal.info, category %in% c("seq", "div")))
     ),
-    checkboxInput("legend", "Show legend", TRUE)
+    checkboxInput("legend", "Show legend", TRUE),
+
+    checkboxGroupInput("variable", "Variable:",
+                   c("Cylinders" = "cyl",
+                     "Transmission" = "am",
+                     "Gears" = "gear"))
   )
 )
 
