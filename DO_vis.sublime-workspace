@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"select",
+				"selected"
+			],
+			[
+				"loggerI",
+				"loggerId"
+			],
+			[
+				"rend",
+				"renderPlot	{shiny}"
+			],
+			[
+				"shin",
+				"shinyServer	{shiny}"
+			],
+			[
+				"sider",
+				"sidebarPanel	{shiny}"
+			],
+			[
+				"title",
+				"titlePanel	{shiny}"
+			],
+			[
 				"bath",
 				"bathymetry"
 			],
@@ -457,8 +481,12 @@
 	},
 	"file_history":
 	[
+		"/Users/WenzhaoXu/Developer/DO_visualization/server.R",
+		"/Users/WenzhaoXu/Developer/DO_visualization/ui.R",
 		"/Users/WenzhaoXu/Developer/DO_Sensor_data/spkrig.R",
 		"/Users/WenzhaoXu/Developer/DO_Sensor_data/newInterpolation.R",
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/R_sql.R",
+		"/Users/WenzhaoXu/Developer/DO_visualization/test.R",
 		"/Users/WenzhaoXu/Developer/adsa/main.R",
 		"/Users/WenzhaoXu/Developer/adsa/main.py",
 		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
@@ -468,7 +496,6 @@
 		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/User/R-Box.sublime-settings",
 		"/Users/WenzhaoXu/Library/Application Support/Sublime Text 3/Packages/R-Box/R-Box.sublime-settings",
-		"/Users/WenzhaoXu/Developer/DO_Sensor_data/R_sql.R",
 		"/Users/WenzhaoXu/Developer/DO_Sensor_data/pythonSQL.py",
 		"/Users/WenzhaoXu/Downloads/hackathon/subset/ADSA_yelp_checkin_subset.csv",
 		"/Users/WenzhaoXu/Downloads/hackathon/subset/ADSA_yelp_business_subset.csv",
@@ -581,13 +608,11 @@
 		"/Users/WenzhaoXu/Library/Mobile Documents/com~apple~CloudDocs/Research/Proj_Triaxus/Output/Paper/NewPdfFigure/new_svg/flow.svg",
 		"/Users/WenzhaoXu/Developer/DO_Sensor_data/interpolation.R",
 		"/Users/WenzhaoXu/Developer/DO_Sensor_data/tmp3.R",
-		"/Users/WenzhaoXu/Developer/DO_Sensor_data/krigin.R",
-		"/Users/WenzhaoXu/Desktop/test/Untitled.tex",
-		"/Volumes/Mac Backup/Developer/Triaxus_ShipAlgorithm/TriaxusGUI.R"
+		"/Users/WenzhaoXu/Developer/DO_Sensor_data/krigin.R"
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -598,9 +623,13 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"hour",
+			"group",
+			"group by",
+			"sep",
 			"python",
 			"map",
 			"grid",
@@ -651,6 +680,11 @@
 			"sheets":
 			[
 			]
+		},
+		{
+			"sheets":
+			[
+			]
 		}
 	],
 	"incremental_find":
@@ -670,11 +704,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.486927625868,
 			1.0
 		],
 		"rows":
@@ -726,7 +767,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

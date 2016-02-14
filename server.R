@@ -39,24 +39,26 @@ shinyServer(function(input,output,session)
 		year <- input$year
 		sql <- sprintf("select longitude,latitude,loggerId,bathymetry from loggerInfo where available=1 and loggerPosition='B'")
    		mydata <- sqlQuery(sql,year)
+   		# print(head(mydata))
+   		# print(class(mydata$bathymetry))
+		# updateSelectizeInput(session, 'selectedID', choices = unique(mydata[,"loggerId"]), selected=NULL, server = FALSE)
+
    		return(mydata)
  	})
 
 	colorpal <- reactive({
-		if(input$var=="Temp")
-    		colorNumeric(input$colors, c(10:30))
-    	else{
-    		colorNumeric(input$colors, c(0,18))
-    	}
+		#if(input$var=="Temp")
+    #		colorNumeric(input$colors, c(10:30))
+    #	else{
+    #		colorNumeric(input$colors, c(0,18))
+    #	}
+	  colorNumeric(input$colors, geoData()$bathymetry)
+	    
   	})
 
 	observe({
 	    pal <- colorpal()
 	    #query the data
-	    if(input$dataType=="NULL"){
-
-	    }
-	    # spatialValueData <- since()
 
 	    leafletProxy("mymap", data = geoData()) %>%
 	      clearShapes() %>%
@@ -78,6 +80,12 @@ shinyServer(function(input,output,session)
     	ID <- isolate(input$selectedID)
     	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerId"]), selected= c(ID,click$id), server = FALSE)
 	})
+
+
+	observe({
+    	leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+  	})
+
 
 
 	output$timeSeriesPlot <- renderDygraph({
