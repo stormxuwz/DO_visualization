@@ -31,27 +31,19 @@ shinyServer(function(input,output,session)
     })
 	
 	observe({
-    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerId"]), selected=NULL,server = FALSE)
+    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
 	})
 	
 
 	geoData <- reactive({
 		year <- input$year
-		sql <- sprintf("select longitude,latitude,loggerId,bathymetry from loggerInfo where available=1 and loggerPosition='B'")
+		sql <- sprintf("select longitude,latitude,loggerID,bathymetry from loggerInfo where available=1 and loggerPosition='B'")
    		mydata <- sqlQuery(sql,year)
-   		# print(head(mydata))
-   		# print(class(mydata$bathymetry))
-		# updateSelectizeInput(session, 'selectedID', choices = unique(mydata[,"loggerId"]), selected=NULL, server = FALSE)
-
    		return(mydata)
  	})
 
 	colorpal <- reactive({
-		#if(input$var=="Temp")
-    #		colorNumeric(input$colors, c(10:30))
-    #	else{
-    #		colorNumeric(input$colors, c(0,18))
-    #	}
+
 	  colorNumeric(input$colors, geoData()$bathymetry)
 	    
   	})
@@ -62,7 +54,7 @@ shinyServer(function(input,output,session)
 
 	    leafletProxy("mymap", data = geoData()) %>%
 	      clearShapes() %>%
-	      addCircles(layerId=~loggerId,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",
+	      addCircles(layerId=~loggerID,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",
 	        fillColor = ~pal(bathymetry), fillOpacity = 0.8)
   	})
 
@@ -78,7 +70,7 @@ shinyServer(function(input,output,session)
 
        	# use isolate to avoid repeat call to input$selectedID
     	ID <- isolate(input$selectedID)
-    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerId"]), selected= c(ID,click$id), server = FALSE)
+    	updateSelectizeInput(session, 'selectedID', choices = unique(isolate(geoData())[,"loggerID"]), selected= c(ID,click$id), server = FALSE)
 	})
 
 
@@ -90,11 +82,17 @@ shinyServer(function(input,output,session)
 
 	output$timeSeriesPlot <- renderDygraph({
 		tmp <- input$selectedID
+
+		lastData <- subset(geoData(),loggerID %in% as.numeric(tmp))
+
 		var <- input$var
 		if(is.null(tmp)){
+			leafletProxy("mymap")%>%clearPopups()
 			return(dygraph(emptyData) %>% dyRangeSelector())
 		}
 
+		leafletProxy("mymap")%>%clearPopups()%>%addPopups(data=lastData,lng=~longitude,lat=~latitude,paste(lastData$loggerID),
+			options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
 		tmp <- paste("logger =",tmp)
 		tmp <- paste(tmp,collapse=" OR ")
 		
@@ -127,12 +125,22 @@ shinyServer(function(input,output,session)
 		# print(data)
 		data <- zoo(subset(data,select=-Time),order.by=strptime(data$Time,format=timeFormat))
 		# print(head(data))
+		if(input$scale){
+			data <- scale(data)
+		}
 		
 		# timeMiddle <- as.POSIXct(input$myDate)
 		# timeStart <- timeMiddle - 12*3600
 		# timeEnd <- timeMiddle + 12*3600
 
 		# dygraph(data, main = "Time Series") %>% dyRangeSelector(dateWindow = c(timeStart, timeEnd)) 
+		# print(head(data))
+		# if(length(tmp$input)==2){
+			# output$cor <- renderText(paste("Correlation:",cor(data[,2],data[3])))
+		# }
+		# else{
+			# output$cor <- renderText("Choose two loggers")
+		# }
 		dygraph(data, main = "Time Series") %>% dyRangeSelector()
 	})
 

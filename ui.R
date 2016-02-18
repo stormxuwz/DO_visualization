@@ -1,4 +1,4 @@
-?library(shiny)
+library(shiny)
 library(dygraphs)
 library(leaflet)
 library(RColorBrewer)
@@ -28,7 +28,10 @@ shinyUI(
   				dateInput("myDate", 
   					label = h5("Date"), 
   					value = "2014-08-01")
-  			)
+  			),
+        column(
+          3
+        )
   		),
 
   		fluidRow(
@@ -70,6 +73,7 @@ shinyUI(
   			),
   			column(
   				7,
+          checkboxInput("scale", "Scaled", value = FALSE, width = NULL),
   				dygraphOutput('timeSeriesPlot')
   			)
   		),
@@ -82,11 +86,13 @@ shinyUI(
 	  				selected = NULL, 
 	  				multiple = TRUE,
 	                options = NULL)
+          # verbatimTextOutput("cor")
 	  		),
 	  		column(
   				3
 	  		)
-
   		)
+
+
 	)
 )
