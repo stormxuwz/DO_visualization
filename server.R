@@ -5,7 +5,10 @@ library(zoo)
 library(reshape2)
 library(leaflet)
 library(RColorBrewer)
-
+library(plotly)
+library(sp)
+library(gstat)
+library(raster)
 # conn <- dbConnect(MySQL(), dbname = "DO2014", username="root", password="XuWenzhaO", host="127.0.0.1", port=3306)
 # geoLocation <- dbReadTable(conn,"loggerInfo")
 
@@ -31,74 +34,15 @@ shinyServer(function(input,output,session)
     })
 	
 	observe({
-    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerId"]), selected=NULL,server = FALSE)
+    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
 	})
 	
 
-	geoData <- reactive({
-		year <- input$year
-		sql <- sprintf("select longitude,latitude,loggerId,bathymetry from loggerInfo where available=1 and loggerPosition='B'")
-   		mydata <- sqlQuery(sql,year)
-   		# print(head(mydata))
-   		# print(class(mydata$bathymetry))
-		# updateSelectizeInput(session, 'selectedID', choices = unique(mydata[,"loggerId"]), selected=NULL, server = FALSE)
-
-   		return(mydata)
- 	})
-
-	colorpal <- reactive({
-		#if(input$var=="Temp")
-    #		colorNumeric(input$colors, c(10:30))
-    #	else{
-    #		colorNumeric(input$colors, c(0,18))
-    #	}
-	  colorNumeric(input$colors, geoData()$bathymetry)
-	    
-  	})
-
-	observe({
-	    pal <- colorpal()
-	    #query the data
-
-	    leafletProxy("mymap", data = geoData()) %>%
-	      clearShapes() %>%
-	      addCircles(layerId=~loggerId,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",
-	        fillColor = ~pal(bathymetry), fillOpacity = 0.8)
-  	})
-
-	observe({
-		click<-input$mymap_shape_click
-   	 	if(is.null(click))
-          return()
-		# print(click)
-		# print(input$mymap_shape_click)
-		# leafletProxy("mymap") %>%clearPopups()
-		leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),
-			options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
-
-       	# use isolate to avoid repeat call to input$selectedID
-    	ID <- isolate(input$selectedID)
-    	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerId"]), selected= c(ID,click$id), server = FALSE)
-	})
-
-
-	observe({
-    	leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
-  	})
-
-
-
-	output$timeSeriesPlot <- renderDygraph({
+	visData <- reactive({
 		tmp <- input$selectedID
-		var <- input$var
-		if(is.null(tmp)){
-			return(dygraph(emptyData) %>% dyRangeSelector())
-		}
-
 		tmp <- paste("logger =",tmp)
 		tmp <- paste(tmp,collapse=" OR ")
-		
-		# print(sql)
+		var <- input$var
 		if(input$dataType=="STD" & input$GroupRange=="daily"){
 			sql <- sprintf("Select date(Time) as Time, STD(%s) as %s, logger from loggerData where %s Group by date(Time),logger",var,var,tmp)
 			# print(sql)
@@ -125,16 +69,145 @@ shinyServer(function(input,output,session)
 		}
 		data <- sqlQuery(sql,input$year) %>% dcast(Time~logger,value.var=var)
 		# print(data)
-		data <- zoo(subset(data,select=-Time),order.by=strptime(data$Time,format=timeFormat))
-		# print(head(data))
-		
-		# timeMiddle <- as.POSIXct(input$myDate)
-		# timeStart <- timeMiddle - 12*3600
-		# timeEnd <- timeMiddle + 12*3600
+		data <- zoo(subset(data,select=-Time),order.by=strptime(data$Time,format=timeFormat,tz="GMT"))
 
-		# dygraph(data, main = "Time Series") %>% dyRangeSelector(dateWindow = c(timeStart, timeEnd)) 
-		dygraph(data, main = "Time Series") %>% dyRangeSelector()
+		return(data)
 	})
 
+	geoData <- reactive({
+		year <- input$year
+		sql <- sprintf("select longitude,latitude,loggerID,bathymetry from loggerInfo where available=1 and loggerPosition='B'")
+   		mydata <- sqlQuery(sql,year)
+   		return(mydata)
+ 	})
+
+	colorpal <- reactive({
+
+	  colorNumeric(input$colors, geoData()$bathymetry)
+	    
+  	})
+
+	observe({
+	   if(input$mapData=="Bathy"){
+		   	pal <- colorpal()
+		    leafletProxy("mymap", data = geoData()) %>%
+		      clearShapes() %>%
+		      addCircles(layerId=~loggerID,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",
+		        fillColor = ~pal(bathymetry), fillOpacity = 0.8)
+	   } 
+  	})
+
+	observe({
+		click<-input$mymap_shape_click
+   	 	if(is.null(click))
+          return()
+
+		leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),
+			options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
+
+       	# use isolate to avoid repeat call to input$selectedID
+    	ID <- isolate(input$selectedID)
+    	updateSelectizeInput(session, 'selectedID', choices = unique(isolate(geoData())[,"loggerID"]), selected= c(ID,click$id), server = FALSE)
+	})
+
+
+	observe({
+    	leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+  	})
+
+
+
+	output$timeSeriesPlot <- renderDygraph({
+		tmp <- input$selectedID
+
+		lastData <- subset(geoData(),loggerID %in% as.numeric(tmp))
+
+		var <- input$var
+		if(is.null(tmp)){
+			leafletProxy("mymap")%>%clearPopups()
+			return(dygraph(emptyData) %>% dyRangeSelector())
+		}
+
+		leafletProxy("mymap")%>%clearPopups()%>%addPopups(data=lastData,lng=~longitude,lat=~latitude,paste(lastData$loggerID),
+			options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
+		
+		data <- visData()
+		if(input$scale){
+			data <- scale(data)
+		}
+
+		if(!input$twoy){
+			dygraph(data, main = "Time Series") %>% dyRangeSelector(retainDateWindow=TRUE)
+		}
+		else{
+			if(length(tmp)==2){
+				name2=names(data)[2]
+				dygraph(data, main = "Time Series") %>% dyRangeSelector(retainDateWindow=TRUE) %>%  dySeries(name2, axis = 'y2')
+			}
+		}
+	})
+
+	output$corr <- renderTable({
+		if(is.null(input$selectedID))
+			return()
+		if(input$dataType=="Raw")
+			return()
+		# if(input$var==""){}
+		return(cor(visData(),use="pairwise.complete.obs"))
+	})
+
+
+	spatialData <- reactive({
+		tmp <- input$selectedID
+		tmp <- paste("logger =",tmp)
+		tmp <- paste(tmp,collapse=" OR ")
+		var <- input$var
+
+		QueryDay <- input$myDate
+		QueryHour <- input$myHour
+
+		# print("hello")
+		if(input$GroupRange=="daily"){
+			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,tmp,QueryDay)
+		}
+		else{
+			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,tmp,QueryDay)
+
+		}
+		# print(sql)
+		data <- sqlQuery(sql,input$year)
+		data <- merge(data,geoData(),by.x = "logger", by.y = "loggerID",all.y = FALSE)
+		data$id <- 1:nrow(data)
+		return(data)
+	})
+
+	output$Variogram <- renderPlotly({
+		if(is.null(input$selectedID)){
+			return()
+		}
+		if(length(input$selectedID)<2){
+			return()
+		}
+		spdata <- spatialData()
+		names(spdata)[3]="var"
+		coordinates(spdata)= ~longitude+latitude
+		projection(spdata)=CRS("+init=epsg:4326")
+		print(spdata)
+		eq <- paste("var",input$equation)
+		print(eq)
+		v <- data.frame(variogram(as.formula(eq),data=spdata,cloud=T,cutoff=10000))
+		print(v)
+		v$leftLogger <- spdata$logger[v$left]
+		v$rightLogger <- spdata$logger[v$right]
+
+		v$leftValue <- spdata$var[v$left]
+		v$rightValue <- spdata$var[v$right]
+
+		p <- plot_ly(v, x = dist, y=gamma, mode="markers",hoverinfo = "text",
+          text = paste(v$leftLogger,"(",round(v$leftValue,2),")--",v$rightLogger,"(",round(v$rightValue,2),")",sep=""))
+
+		p
+
+	})
 
 })

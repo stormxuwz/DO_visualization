@@ -1,8 +1,8 @@
-?library(shiny)
+library(shiny)
 library(dygraphs)
 library(leaflet)
 library(RColorBrewer)
-
+library(plotly)
 
 shinyUI(
   fluidPage(
@@ -28,7 +28,14 @@ shinyUI(
   				dateInput("myDate", 
   					label = h5("Date"), 
   					value = "2014-08-01")
-  			)
+  			),
+        column(
+          3,
+          selectInput("mapData", 
+              label = h5("Spatial Variable"), 
+                choices = list("Bathymetry" = "Bathy", "Logger Data" = "logData"), 
+                selected = "Bathy")
+        )
   		),
 
   		fluidRow(
@@ -66,27 +73,33 @@ shinyUI(
   		fluidRow(
   			column(
   				5,
-  				leafletOutput("mymap")
-  			),
+  				leafletOutput("mymap"),
+          selectizeInput("selectedID", label=h5("Selected Loggers"), 
+            choices=NULL, 
+            selected = NULL, 
+            multiple = TRUE,
+            options = NULL),
+          actionButton("ClearAll","clear all")
+
+        ),
   			column(
   				7,
-  				dygraphOutput('timeSeriesPlot')
+          tabsetPanel(
+            
+            tabPanel("Time Series",
+              dygraphOutput('timeSeriesPlot'),
+              checkboxInput("scale", "Scaled?", value = FALSE, width = NULL),
+              checkboxInput("twoy", "Double Y?", value = FALSE, width = NULL)
+              ),
+            
+            tabPanel("Correlation",
+              tableOutput('corr')),
+
+            tabPanel("Variogram",
+                plotlyOutput("Variogram"),
+                textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude"))
+          )
   			)
-  		),
-
-
-  		fluidRow(
-  			column(3,
-	  			selectizeInput("selectedID", label=h5("Selected Loggers"), 
-	  				choices=NULL, 
-	  				selected = NULL, 
-	  				multiple = TRUE,
-	                options = NULL)
-	  		),
-	  		column(
-  				3
-	  		)
-
   		)
 	)
 )
