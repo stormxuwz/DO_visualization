@@ -97,7 +97,7 @@ shinyUI(
 
             tabPanel("Variogram",
                 plotlyOutput("Variogram"),
-                textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude"))
+                textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude",placeholder="detrend: ~longitude+latitude"))
           )
   			)
   		)

@@ -12,12 +12,7 @@ ui <- bootstrapPage(
     selectInput("colors", "Color Scheme",
       rownames(subset(brewer.pal.info, category %in% c("seq", "div")))
     ),
-    checkboxInput("legend", "Show legend", TRUE),
-
-    checkboxGroupInput("variable", "Variable:",
-                   c("Cylinders" = "cyl",
-                     "Transmission" = "am",
-                     "Gears" = "gear"))
+    checkboxInput("legend", "Show legend", TRUE)
   )
 )
 
@@ -31,7 +26,6 @@ server <- function(input, output, session) {
   # This reactive expression represents the palette function,
   # which changes as the user makes selections in UI.
   colorpal <- reactive({
-    print(input$colors)
     colorNumeric(input$colors, quakes$mag)
   })
   

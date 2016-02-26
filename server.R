@@ -90,10 +90,11 @@ shinyServer(function(input,output,session)
 	observe({
 	   if(input$mapData=="Bathy"){
 		   	pal <- colorpal()
-		    leafletProxy("mymap", data = geoData()) %>%
-		      clearShapes() %>%
-		      addCircles(layerId=~loggerID,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",
-		        fillColor = ~pal(bathymetry), fillOpacity = 0.8)
+		   	# print(isolate(input$mapData))
+		   	mygeodata <- geoData()
+		   	# print(mygeodata)
+		    leafletProxy("mymap", data = mygeodata) %>% clearShapes() %>% addCircles(layerId=~loggerID,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",fillColor = ~pal(bathymetry), fillOpacity = 0.8)
+			# leafletProxy("mymap", data = mygeodata) %>% clearShapes() %>% addMarkers(layerId=~loggerID,lng=~longitude,lat=~latitude)
 	   } 
   	})
 
@@ -102,8 +103,7 @@ shinyServer(function(input,output,session)
    	 	if(is.null(click))
           return()
 
-		leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),
-			options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
+		leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
 
        	# use isolate to avoid repeat call to input$selectedID
     	ID <- isolate(input$selectedID)
@@ -185,18 +185,18 @@ shinyServer(function(input,output,session)
 		if(is.null(input$selectedID)){
 			return()
 		}
-		if(length(input$selectedID)<2){
+		if(length(input$selectedID)<3){
 			return()
 		}
 		spdata <- spatialData()
 		names(spdata)[3]="var"
 		coordinates(spdata)= ~longitude+latitude
 		projection(spdata)=CRS("+init=epsg:4326")
-		print(spdata)
+		#print(spdata)
 		eq <- paste("var",input$equation)
-		print(eq)
+		#print(eq)
 		v <- data.frame(variogram(as.formula(eq),data=spdata,cloud=T,cutoff=10000))
-		print(v)
+		# print(v)
 		v$leftLogger <- spdata$logger[v$left]
 		v$rightLogger <- spdata$logger[v$right]
 
@@ -205,7 +205,6 @@ shinyServer(function(input,output,session)
 
 		p <- plot_ly(v, x = dist, y=gamma, mode="markers",hoverinfo = "text",
           text = paste(v$leftLogger,"(",round(v$leftValue,2),")--",v$rightLogger,"(",round(v$rightValue,2),")",sep=""))
-
 		p
 
 	})
