@@ -13,7 +13,6 @@ source("dbconn.R")
 # conn <- dbConnect(MySQL(), dbname = "DO2014", username="root", password="XuWenzhaO", host="127.0.0.1", port=3306)
 # geoLocation <- dbReadTable(conn,"loggerInfo")
 
-
 emptyData <- zoo(c(rep(NA, 4)),order.by=as.Date(c("2014-1-1","2014-1-2")))
 
 # ID <- input$selectedID
@@ -77,20 +76,28 @@ shinyServer(function(input,output,session)
  	})
 
 	colorpal <- reactive({
-
-	  colorNumeric(input$colors, geoData()$bathymetry)
+      if(input$mapData == "Bathy"){
+        colorNumeric(input$colors, geoData()$bathymetry)
+      }
+	    else{
+	      colorNumeric(input$colors, spatialDataAll()[,3])
+	    }
 	    
   	})
 
 	observe({
+	   pal <- colorpal()
 	   if(input$mapData=="Bathy"){
-		   	pal <- colorpal()
-		   	# print(isolate(input$mapData))
+		   	
 		   	mygeodata <- geoData()
 		   	# print(mygeodata)
 		    leafletProxy("mymap", data = mygeodata) %>% clearShapes() %>% addCircles(layerId=~loggerID,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",fillColor = ~pal(bathymetry), fillOpacity = 0.8)
-			# leafletProxy("mymap", data = mygeodata) %>% clearShapes() %>% addMarkers(layerId=~loggerID,lng=~longitude,lat=~latitude)
-	   } 
+	   }
+		  else{
+		    spdata <- spatialDataAll()
+		    names(spdata)[3]="var"
+		    leafletProxy("mymap", data = spdata) %>% clearShapes() %>% addCircles(layerId=~logger,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",fillColor = ~pal(var), fillOpacity = 0.8)
+		  }
   	})
 
 	observe({
@@ -107,7 +114,14 @@ shinyServer(function(input,output,session)
 
 
 	observe({
-    	leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+	    if(input$mapData=="Bathy"){
+	      leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+	    }
+	    else{
+	      spdata <- spatialDataAll()
+	      names(spdata)[3]="var"
+	      leafletProxy("mymap",data=spdata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~var)
+	    }
   	})
 
 
@@ -151,7 +165,32 @@ shinyServer(function(input,output,session)
 		return(cor(visData(),use="pairwise.complete.obs"))
 	})
 
-
+	spatialDataAll <- reactive({
+	
+	  var <- input$var
+	  
+	  QueryDay <- input$myDate
+	  QueryHour <- input$myHour
+	  year <- input$year
+	  
+	  # print("hello")
+	  if(input$GroupRange=="daily"){
+	    sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where date(Time) = '%s' Group by date(Time),logger",var,var,year,QueryDay)
+	  }
+	  else{
+	    sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where date(Time) = '%s' Group by date(Time),logger",var,var,year,QueryDay)
+	    
+	  }
+	  # print(sql)
+	  data <- sqlQuery(sql,input$year)
+	  data <- merge(data,geoData(),by.x = "logger", by.y = "loggerID",all.y = FALSE)
+	  data$id <- 1:nrow(data)
+	  return(data)
+	})
+	
+	
+	
+	
 	spatialData <- reactive({
 		tmp <- input$selectedID
 		tmp <- paste("logger =",tmp)
