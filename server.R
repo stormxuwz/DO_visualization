@@ -1,5 +1,5 @@
 library(shiny)
-library(RMySQL)
+
 library(dygraphs)
 library(zoo)
 library(reshape2)
@@ -9,19 +9,11 @@ library(plotly)
 library(sp)
 library(gstat)
 library(raster)
+source("dbconn.R")
 # conn <- dbConnect(MySQL(), dbname = "DO2014", username="root", password="XuWenzhaO", host="127.0.0.1", port=3306)
 # geoLocation <- dbReadTable(conn,"loggerInfo")
 
 
-sqlQuery <- function (sql,year) {
-		  #conn <- dbConnect(MySQL(), dbname = paste("DO",year,sep=""), username="root", password="XuWenzhaO", host="127.0.0.1", port=3306)
-      conn <- dbConnect(MySQL(), dbname = "DO", username="root", password="XuWenzhaO", host="127.0.0.1", port=3306)
-      result <- dbGetQuery(conn,sql)
-		  # cat(sql)
-		  dbDisconnect(conn)
-		  # return the dataframe
-		  return(result)
-}
 emptyData <- zoo(c(rep(NA, 4)),order.by=as.Date(c("2014-1-1","2014-1-2")))
 
 # ID <- input$selectedID
@@ -67,7 +59,7 @@ shinyServer(function(input,output,session)
 			timeFormat="%Y-%m-%d %H"
 		}
 		else{
-			sql <- sprintf("Select Time, %s, logger from loggerData_%d where %s",var,year,tmp)
+			sql <- sprintf("Select Time, %s, logger from loggerData_%s where %s",var,year,tmp)
 			timeFormat="%Y-%m-%d %H:%M:%S"
 		}
 		data <- sqlQuery(sql,input$year) %>% dcast(Time~logger,value.var=var)
@@ -168,13 +160,14 @@ shinyServer(function(input,output,session)
 
 		QueryDay <- input$myDate
 		QueryHour <- input$myHour
+		year <- input$year
 
 		# print("hello")
 		if(input$GroupRange=="daily"){
-			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,tmp,QueryDay)
+			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,year,tmp,QueryDay)
 		}
 		else{
-			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,tmp,QueryDay)
+			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,year,tmp,QueryDay)
 
 		}
 		# print(sql)

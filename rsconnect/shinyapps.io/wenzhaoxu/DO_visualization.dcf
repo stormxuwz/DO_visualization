@@ -1,0 +1,10 @@
+name: DO_visualization
+account: wenzhaoxu
+server: shinyapps.io
+appId: 86345
+bundleId: 384092
+url: https://wenzhaoxu.shinyapps.io/DO_visualization/
+when: 1456815445.00955
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: DO_vis.sublime-project|DO_vis.sublime-workspace|README.md|sample.png|test.R
