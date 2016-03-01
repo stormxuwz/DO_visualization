@@ -29,9 +29,18 @@ shinyServer(function(input,output,session)
     	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
 	})
 	
-
+  observe({
+    input$ClearAll
+    updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
+  })
+  
+  #observe({
+    #input$selectAll
+    #updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=unique(isolate(geoData())[,"loggerID"]),server = FALSE)
+  #})
+  
 	visData <- reactive({
-	  year <- input$year
+	  year <- isolate(input$year)
 		tmp <- input$selectedID
 		tmp <- paste("logger =",tmp)
 		tmp <- paste(tmp,collapse=" OR ")
@@ -95,8 +104,12 @@ shinyServer(function(input,output,session)
 	   }
 		  else{
 		    spdata <- spatialDataAll()
-		    names(spdata)[3]="var"
-		    leafletProxy("mymap", data = spdata) %>% clearShapes() %>% addCircles(layerId=~logger,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",fillColor = ~pal(var), fillOpacity = 0.8)
+		    if(is.null(spdata)){
+		      leafletProxy("mymap", data = spdata) %>% clearShapes()
+		    }else{
+		      names(spdata)[3]="val"
+		      leafletProxy("mymap", data = spdata) %>% clearShapes() %>% addCircles(layerId=~logger,lng=~longitude,lat=~latitude,radius = 3000, weight = 1, color = "#777777",fillColor = ~pal(val), fillOpacity = 0.8)
+		    }
 		  }
   	})
 
@@ -105,7 +118,7 @@ shinyServer(function(input,output,session)
    	 	if(is.null(click))
           return()
 
-		leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
+		  leafletProxy("mymap")%>%addPopups(click$lng,click$lat, paste(click$id),options=popupOptions(maxHeight=20,zoomAnimation=FALSE))
 
        	# use isolate to avoid repeat call to input$selectedID
     	ID <- isolate(input$selectedID)
@@ -115,12 +128,21 @@ shinyServer(function(input,output,session)
 
 	observe({
 	    if(input$mapData=="Bathy"){
-	      leafletProxy("mymap",data=geoData()) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+	      mydata <- geoData()
+	      if(is.null(mydata)){
+	        leafletProxy("mymap",data=mydata) %>% clearControls()
+	      }else{
+	        leafletProxy("mymap",data=mydata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~bathymetry)
+	      }
 	    }
 	    else{
 	      spdata <- spatialDataAll()
-	      names(spdata)[3]="var"
-	      leafletProxy("mymap",data=spdata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~var)
+	      if(is.null(spdata)){
+	        leafletProxy("mymap",data=spdata) %>% clearControls()
+	      }else{
+	        names(spdata)[3]="var"
+	        leafletProxy("mymap",data=spdata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~var)
+	      }
 	    }
   	})
 
@@ -158,20 +180,32 @@ shinyServer(function(input,output,session)
 
 	output$corr <- renderTable({
 		if(is.null(input$selectedID))
-			return()
+			return(NULL)
 		if(input$dataType=="Raw")
-			return()
+			return(NULL)
 		# if(input$var==""){}
 		return(cor(visData(),use="pairwise.complete.obs"))
 	})
 
+	observe({
+	  input$year
+	  leafletProxy("mymap") %>% clearPopups()
+	})
+	#observe({
+	#  if(input$year == "2015")
+	#    updateDateInput(session,"myDate",value = "2015-08-01")
+	#  else
+	#    updateDateInput(session,"myDate",value = "2014-08-01")
+	#})
+	
+	
 	spatialDataAll <- reactive({
 	
 	  var <- input$var
 	  
 	  QueryDay <- input$myDate
 	  QueryHour <- input$myHour
-	  year <- input$year
+	  year <- isolate(input$year)
 	  
 	  # print("hello")
 	  if(input$GroupRange=="daily"){
@@ -181,8 +215,11 @@ shinyServer(function(input,output,session)
 	    sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where date(Time) = '%s' Group by date(Time),logger",var,var,year,QueryDay)
 	    
 	  }
-	  # print(sql)
+	  print(sql)
 	  data <- sqlQuery(sql,input$year)
+	  if(nrow(data)<1){
+	    return()
+	  }
 	  data <- merge(data,geoData(),by.x = "logger", by.y = "loggerID",all.y = FALSE)
 	  data$id <- 1:nrow(data)
 	  return(data)
@@ -199,8 +236,8 @@ shinyServer(function(input,output,session)
 
 		QueryDay <- input$myDate
 		QueryHour <- input$myHour
-		year <- input$year
-
+		year <- isolate(input$year)
+    
 		# print("hello")
 		if(input$GroupRange=="daily"){
 			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,year,tmp,QueryDay)
@@ -211,6 +248,9 @@ shinyServer(function(input,output,session)
 		}
 		# print(sql)
 		data <- sqlQuery(sql,input$year)
+		if(nrow(data)<1){
+		  return()
+		}
 		data <- merge(data,geoData(),by.x = "logger", by.y = "loggerID",all.y = FALSE)
 		data$id <- 1:nrow(data)
 		return(data)
@@ -224,6 +264,8 @@ shinyServer(function(input,output,session)
 			return()
 		}
 		spdata <- spatialData()
+		if(is.null(spdata))
+		  return()
 		names(spdata)[3]="var"
 		coordinates(spdata)= ~longitude+latitude
 		projection(spdata)=CRS("+init=epsg:4326")

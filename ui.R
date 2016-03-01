@@ -33,7 +33,7 @@ shinyUI(
           3,
           selectInput("mapData", 
               label = h5("Spatial Variable"), 
-                choices = list("Bathymetry" = "Bathy", "Logger Data" = "logData"), 
+                choices = list("Bathymetry" = "Bathy", "Logger Data (daily)" = "logData"), 
                 selected = "Bathy")
         )
   		),
@@ -58,7 +58,7 @@ shinyUI(
   			column(
   				3,
   				sliderInput("myHour", 
-  					label = h5("Hour"), 
+  					label = h5("Hour (not implemented yet)"), 
   					min = 0, max = 23,value=12)
   			),
 			column(
@@ -80,6 +80,7 @@ shinyUI(
             multiple = TRUE,
             options = NULL),
           actionButton("ClearAll","clear all")
+  				#actionButton("selectAllLogal","select all")
 
         ),
   			column(
