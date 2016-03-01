@@ -33,7 +33,7 @@ shinyUI(
           3,
           selectInput("mapData", 
               label = h5("Spatial Variable"), 
-                choices = list("Bathymetry" = "Bathy", "Logger Data (daily)" = "logData"), 
+                choices = list("Bathymetry" = "Bathy", "Logger Data (daily mean)" = "logData"), 
                 selected = "Bathy")
         )
   		),
@@ -98,7 +98,7 @@ shinyUI(
 
             tabPanel("Variogram",
                 plotlyOutput("Variogram"),
-                textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude",placeholder="detrend: ~longitude+latitude"))
+                textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude",placeholder="detrend: ~longitude+latitude＋bathymetry"))
           )
   			)
   		)

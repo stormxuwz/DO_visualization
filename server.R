@@ -27,10 +27,12 @@ shinyServer(function(input,output,session)
 	
 	observe({
     	updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
+	   
 	})
 	
   observe({
     input$ClearAll
+    leafletProxy("mymap") %>% clearPopups()
     updateSelectizeInput(session, 'selectedID', choices = unique(geoData()[,"loggerID"]), selected=NULL,server = FALSE)
   })
   
@@ -140,8 +142,8 @@ shinyServer(function(input,output,session)
 	      if(is.null(spdata)){
 	        leafletProxy("mymap",data=spdata) %>% clearControls()
 	      }else{
-	        names(spdata)[3]="var"
-	        leafletProxy("mymap",data=spdata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~var)
+	        names(spdata)[3]="avg"
+	        leafletProxy("mymap",data=spdata) %>% clearControls() %>% addLegend(position = "bottomright", pal = colorpal(), values = ~avg)
 	      }
 	    }
   	})
@@ -279,7 +281,7 @@ shinyServer(function(input,output,session)
 
 		v$leftValue <- spdata$var[v$left]
 		v$rightValue <- spdata$var[v$right]
-
+    #print(v)
 		p <- plot_ly(v, x = dist, y=gamma, mode="markers",hoverinfo = "text",
           text = paste(v$leftLogger,"(",round(v$leftValue,2),")--",v$rightLogger,"(",round(v$rightValue,2),")",sep=""))
 		p
