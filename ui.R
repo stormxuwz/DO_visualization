@@ -98,6 +98,11 @@ shinyUI(
 
             tabPanel("Variogram",
                 plotlyOutput("Variogram"),
+                # dateRangeInput('dateRangeVariogram',
+                      # label = paste("variogram date range"),
+                    # separator = " to ", format = "mm/dd/yy",
+                    # startview = 'year', weekstart =0
+                # ),
                 textInput("equation",h5("Variogram Expr"),value = "~longitude+latitude",placeholder="detrend: ~longitude+latitude＋bathymetry"))
           )
   			)

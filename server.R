@@ -15,6 +15,8 @@ source("dbconn.R")
 
 emptyData <- zoo(c(rep(NA, 4)),order.by=as.Date(c("2014-1-1","2014-1-2")))
 
+boxcox <- function(x,lambda){return((x^lambda-1)/lambda)}
+
 # ID <- input$selectedID
 
 shinyServer(function(input,output,session)
@@ -238,15 +240,19 @@ shinyServer(function(input,output,session)
 
 		QueryDay <- input$myDate
 		QueryHour <- input$myHour
+
+		startDay <- as.character(input$dateRangeVariogram[1])
+		endDay <- as.character(input$dateRangeVariogram[2])
+		# print(startDay)
 		year <- isolate(input$year)
     
 		# print("hello")
 		if(input$GroupRange=="daily"){
+			# sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and Time <= '%s' and Time >= '%s' Group by date(Time),logger",var,var,year,tmp,endDay,startDay)
 			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,year,tmp,QueryDay)
 		}
 		else{
 			sql <- sprintf("Select date(Time) as Time, AVG(%s) as %s, logger from loggerData_%s where (%s) and date(Time) = '%s' Group by date(Time),logger",var,var,year,tmp,QueryDay)
-
 		}
 		# print(sql)
 		data <- sqlQuery(sql,input$year)
@@ -266,6 +272,9 @@ shinyServer(function(input,output,session)
 			return()
 		}
 		spdata <- spatialData()
+		spdata[,3] <- ifelse(spdata[,3]>0.01,spdata[,3],0.01)
+		spdata[,3] <- boxcox(spdata[,3],0.2)
+		# print(head(spdata))
 		if(is.null(spdata))
 		  return()
 		names(spdata)[3]="var"
@@ -281,6 +290,7 @@ shinyServer(function(input,output,session)
 
 		v$leftValue <- spdata$var[v$left]
 		v$rightValue <- spdata$var[v$right]
+		saveRDS(v,"test.rds")
     #print(v)
 		p <- plot_ly(v, x = dist, y=gamma, mode="markers",hoverinfo = "text",
           text = paste(v$leftLogger,"(",round(v$leftValue,2),")--",v$rightLogger,"(",round(v$rightValue,2),")",sep=""))
